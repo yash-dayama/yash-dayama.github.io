@@ -23,11 +23,19 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
-        run: yarn
+        run: npm ci
 
       - name: Generate
-        run: yarn run generate
+        run: npm run generate
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

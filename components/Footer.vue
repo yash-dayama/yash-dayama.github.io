@@ -9,7 +9,7 @@
             <a href="https://www.linkedin.com/in/yashdayama/" target="_blank" class="social-link">
               <span>LinkedIn</span>
             </a>
-            <a href="https://github.com/yashdayama" target="_blank" class="social-link">
+            <a href="https://github.com/yash-dayama" target="_blank" class="social-link">
               <span>GitHub</span>
             </a>
             <a href="mailto:yash.dayamaa@gmail.com" class="social-link">

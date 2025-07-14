@@ -43,7 +43,7 @@
               <div class="contact-icon">🌐</div>
               <div class="contact-details">
                 <h4>GitHub</h4>
-                <a href="https://github.com/yashdayama" target="_blank">github.com/yashdayama</a>
+                <a href="https://github.com/yash-dayama" target="_blank">github.com/yash-dayama</a>
               </div>
             </div>
           </div>
@@ -117,8 +117,12 @@
 import { ref, reactive, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import emailjs from '@emailjs/browser'
 
+const config = useRuntimeConfig()
 gsap.registerPlugin(ScrollTrigger)
+
+emailjs.init(config.public.emailjs.publicKey)
 
 const sectionHeader = ref(null)
 const contactInfo = ref(null)
@@ -135,18 +139,33 @@ const form = reactive({
 const submitForm = async () => {
   isSubmitting.value = true
   
-  // Simulate form submission
-  setTimeout(() => {
-    alert('Thank you for your message! I\'ll get back to you soon.')
+  try {
+    const templateParams = {
+      name: form.name,
+      email: form.email,
+      subject: form.subject,
+      message: form.message
+    }
+
+    await emailjs.send(
+      config.public.emailjs.serviceId,
+      config.public.emailjs.templateId,
+      templateParams
+    )
+
+    alert('Message sent successfully!')
     
     // Reset form
     form.name = ''
     form.email = ''
     form.subject = ''
     form.message = ''
-    
+  } catch (error) {
+    console.error('Error sending email:', error)
+    alert('Sorry, there was an error sending your message. Please try again later.')
+  } finally {
     isSubmitting.value = false
-  }, 2000)
+  }
 }
 
 onMounted(() => {

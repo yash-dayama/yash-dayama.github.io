@@ -1,6 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
+  runtimeConfig: {
+    public: {
+      emailjs: {
+        publicKey: process.env.EMAILJS_PUBLIC_KEY,
+        serviceId: process.env.EMAILJS_SERVICE_ID,
+        templateId: process.env.EMAILJS_TEMPLATE_ID
+      }
+    }
+  },
   devtools: { enabled: false },
   modules: ['@nuxt/image'],
   css: ['~/assets/css/main.css'],

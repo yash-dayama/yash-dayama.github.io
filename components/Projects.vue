@@ -40,7 +40,7 @@
       <div class="projects-cta" ref="projectsCta">
         <h3>Want to see more?</h3>
         <p>Check out my GitHub for more projects and contributions</p>
-        <a href="https://github.com/yashdayama" target="_blank" class="btn-primary">
+        <a href="https://github.com/yash-dayama" target="_blank" class="btn-primary">
           View All Projects
         </a>
       </div>

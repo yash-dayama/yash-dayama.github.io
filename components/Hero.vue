@@ -118,6 +118,25 @@ onMounted(() => {
     "-=0.5"
   );
 
+  // Visual elements and floating elements animation
+  tl.fromTo(
+    heroVisual.value,
+    { x: 100, opacity: 0 },
+    { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+    "-=0.3"
+  ).fromTo(
+    ".element",
+    { scale: 0, rotation: 180 },
+    {
+      scale: 1,
+      rotation: 0,
+      duration: 0.6,
+      stagger: 0.08,
+      ease: "back.out(1.7)",
+    },
+    "-=0.5"
+  );
+
   // Buttons animation
   tl.fromTo(
     heroButtons.value.children,
@@ -140,28 +159,6 @@ onMounted(() => {
     "-=0.3"
   );
 
-  // Visual elements animation
-  tl.fromTo(
-    heroVisual.value,
-    { x: 100, opacity: 0 },
-    { x: 0, opacity: 1, duration: 1, ease: "power3.out" },
-    "-=1"
-  );
-
-  // Floating elements animation
-  gsap.fromTo(
-    ".element",
-    { scale: 0, rotation: 180 },
-    {
-      scale: 1,
-      rotation: 0,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: "back.out(1.7)",
-      delay: 0.5,
-    }
-  );
-
   // Scroll indicator animation
   gsap.fromTo(
     scrollIndicator.value,
@@ -169,16 +166,17 @@ onMounted(() => {
     { y: 0, opacity: 1, duration: 1, delay: 2.5, ease: "power3.out" }
   );
 
-  // Continuous floating animation for elements
-  gsap.to(".element", {
-    y: -20,
-    duration: 2,
-    repeat: -1,
-    yoyo: true,
-    ease: "power2.inOut",
-    stagger: 0.2,
-    delay: 1.5,
-  });
+  // Start continuous floating animation immediately after elements appear
+  tl.add(() => {
+    gsap.to(".element", {
+      y: -15,
+      duration: 1.5,
+      repeat: -1,
+      yoyo: true,
+      ease: "power2.inOut",
+      stagger: 0.15,
+    });
+  }, "-=0.3");
 });
 </script>
 
@@ -296,6 +294,8 @@ onMounted(() => {
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 2;
+  max-height: max-content;
+  min-width: min-content
 }
 
 .element:hover {
@@ -415,7 +415,7 @@ onMounted(() => {
   .hero {
     padding: 40px 0;
     min-height: calc(100vh - 60px);
-    margin-top: 60px;
+    /* margin-top: 60px; */
   }
 
   .hero-content {
@@ -491,7 +491,7 @@ onMounted(() => {
 @media (max-width: 480px) {
   .hero {
     padding: 20px 0;
-    margin-top: 40px;
+    margin-top: 32px;
   }
 
   .hero-text h1 {

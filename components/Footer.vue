@@ -7,13 +7,13 @@
           <p>Full Stack Developer passionate about creating innovative web solutions.</p>
           <div class="social-links">
             <a href="https://www.linkedin.com/in/yashdayama/" target="_blank" class="social-link">
-              <span>LinkedIn</span>
+              <i class="fab fa-linkedin-in"></i>
             </a>
             <a href="https://github.com/yash-dayama" target="_blank" class="social-link">
-              <span>GitHub</span>
+              <i class="fab fa-github"></i>
             </a>
             <a href="mailto:yash.dayamaa@gmail.com" class="social-link">
-              <span>Email</span>
+              <i class="fas fa-envelope"></i>
             </a>
           </div>
         </div>
@@ -78,6 +78,9 @@ const scrollTo = (elementId) => {
   color: var(--text-primary);
   padding: 60px 0 20px;
   border-top: 1px solid var(--border-color);
+  width: 100%;
+  position: relative;
+  z-index: 100;
 }
 
 .footer-content {
@@ -127,32 +130,31 @@ const scrollTo = (elementId) => {
 
 .social-links {
   display: flex;
-  gap: 15px;
+  gap: 20px;
 }
 
 .social-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   background: var(--bg-secondary);
-  border-radius: 50%;
+  border-radius: 12px;
   color: var(--text-secondary);
   text-decoration: none;
   transition: all 0.3s ease;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 1.5rem;
   border: 1px solid var(--border-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 0 10px;
 }
 
 .social-link:hover {
-  background: #6366f1;
+  background: #e2e2f3;
+  color: white;
   transform: translateY(-3px);
-}
-
-.social-link span {
-  font-size: 0.8rem;
+  box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
 }
 
 .footer-bottom {
@@ -170,6 +172,7 @@ const scrollTo = (elementId) => {
   .footer-content {
     grid-template-columns: 1fr;
     gap: 30px;
+    padding: 0 15px;
   }
   
   .footer-section {
@@ -178,6 +181,11 @@ const scrollTo = (elementId) => {
   
   .social-links {
     justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .footer-section:not(:first-child) {
+    display: none;
   }
 }
 </style>

@@ -355,6 +355,7 @@ onMounted(() => {
   border-radius: 20px;
   box-shadow: 0 10px 30px var(--shadow-light);
   border: 1px solid var(--border-color);
+  align-self: flex-start;
 }
 
 .form-group {

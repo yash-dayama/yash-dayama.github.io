@@ -6,19 +6,25 @@
           <div class="logo" ref="logo">
             <h2 class="text-gradient">YD</h2>
           </div>
-          
+
           <ul class="nav-menu" ref="navMenu">
             <li><a href="#home" @click="scrollTo('home')">Home</a></li>
             <li><a href="#about" @click="scrollTo('about')">About</a></li>
-            <li><a href="#experience" @click="scrollTo('experience')">Experience</a></li>
-            <li><a href="#projects" @click="scrollTo('projects')">Projects</a></li>
+            <li>
+              <a href="#experience" @click="scrollTo('experience')"
+                >Experience</a
+              >
+            </li>
+            <li>
+              <a href="#projects" @click="scrollTo('projects')">Projects</a>
+            </li>
             <li><a href="#contact" @click="scrollTo('contact')">Contact</a></li>
           </ul>
-          
+
           <div class="nav-actions">
             <ThemeToggle />
           </div>
-          
+
           <div class="nav-toggle" @click="toggleMenu" ref="navToggle">
             <span></span>
             <span></span>
@@ -31,43 +37,53 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { gsap } from 'gsap'
+import { ref, onMounted } from "vue";
+import { gsap } from "gsap";
 
-const header = ref(null)
-const logo = ref(null)
-const navMenu = ref(null)
-const navToggle = ref(null)
+const header = ref(null);
+const logo = ref(null);
+const navMenu = ref(null);
+const navToggle = ref(null);
 
 const scrollTo = (elementId) => {
-  const element = document.getElementById(elementId)
+  const element = document.getElementById(elementId);
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth' })
+    element.scrollIntoView({ behavior: "smooth" });
   }
-}
+};
 
 const toggleMenu = () => {
-  navMenu.value.classList.toggle('active')
-  navToggle.value.classList.toggle('active')
-}
+  navMenu.value.classList.toggle("active");
+  navToggle.value.classList.toggle("active");
+};
 
 onMounted(() => {
   // Animate header on load
-  gsap.fromTo(header.value, 
+  gsap.fromTo(
+    header.value,
     { y: -100, opacity: 0 },
     { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
-  )
-  
-  gsap.fromTo(logo.value,
+  );
+
+  gsap.fromTo(
+    logo.value,
     { scale: 0, rotation: 180 },
     { scale: 1, rotation: 0, duration: 1, delay: 0.3, ease: "back.out(1.7)" }
-  )
-  
-  gsap.fromTo(navMenu.value.children,
+  );
+
+  gsap.fromTo(
+    navMenu.value.children,
     { y: -50, opacity: 0 },
-    { y: 0, opacity: 1, duration: 0.8, delay: 0.5, stagger: 0.1, ease: "power3.out" }
-  )
-})
+    {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      delay: 0.5,
+      stagger: 0.1,
+      ease: "power3.out",
+    }
+  );
+});
 </script>
 
 <style scoped>
@@ -114,7 +130,7 @@ onMounted(() => {
 }
 
 .nav-menu a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -5px;
   left: 0;
@@ -163,27 +179,27 @@ onMounted(() => {
     transition: left 0.3s ease;
     border-top: 1px solid var(--border-color);
   }
-  
+
   .nav-menu.active {
     left: 0;
   }
-  
+
   .nav-toggle {
     display: flex;
   }
-  
+
   .nav-toggle.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
   }
-  
+
   .nav-toggle.active span:nth-child(2) {
     opacity: 0;
   }
-  
+
   .nav-toggle.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
   }
-  
+
   .nav-actions {
     position: absolute;
     top: 29px;

@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <div class="app-wrapper">
     <NuxtRouteAnnouncer />
     <Header />
-    <Hero />
-    <About />
-    <Experience />
-    <Projects />
-    <Contact />
+    <main>
+      <Hero />
+      <About />
+      <Experience />
+      <Projects />
+      <Contact />
+    </main>
     <Footer />
   </div>
 </template>
@@ -49,6 +51,22 @@ onMounted(() => {
 </script>
 
 <style>
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  overflow-x: hidden;
+  padding-top: 60px;
+}
+
 /* Add CSS variable for RGB values needed for rgba() */
 :root {
   --bg-primary-rgb: 255, 255, 255;

@@ -39,6 +39,7 @@ npm install
 EMAILJS_PUBLIC_KEY=your_public_key
 EMAILJS_SERVICE_ID=your_service_id
 EMAILJS_TEMPLATE_ID=your_template_id
+GOOGLE_ANALYTICS_ID-your_analytics_key
 ```
 
 4. Run the development server:

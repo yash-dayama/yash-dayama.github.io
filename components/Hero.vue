@@ -93,11 +93,20 @@ const scrollTo = (elementId) => {
   }
 };
 
+const config = useRuntimeConfig();
+
 const trackCVDownload = () => {
-  window.gtag("event", "cv_download", {
-    event_category: "engagement",
-    event_label: "CV Download Button Click",
-  });
+  try {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag("event", "CV_Download_Click", {
+        event_category: "Portfolio_Engagement",
+        event_label: "Resume_Download",
+        send_to: config.public.googleAnalytics.id
+      });
+    }
+  } catch (error) {
+    console.warn('Google Analytics tracking unavailable');
+  }
 };
 
 onMounted(() => {

@@ -7,6 +7,9 @@ export default defineNuxtConfig({
         publicKey: process.env.EMAILJS_PUBLIC_KEY,
         serviceId: process.env.EMAILJS_SERVICE_ID,
         templateId: process.env.EMAILJS_TEMPLATE_ID
+      },
+      googleAnalytics: {
+        id: process.env.GOOGLE_ANALYTICS_ID
       }
     }
   },
@@ -16,7 +19,7 @@ export default defineNuxtConfig({
     'nuxt-gtag'
   ],
   gtag: {
-    id: 'G-V862ZC2J7Z'
+    id: process.env.GOOGLE_ANALYTICS_ID
   },
   vite: {
     build: {

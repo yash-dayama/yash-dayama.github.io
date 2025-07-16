@@ -37,7 +37,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 1.6;
   color: var(--text-primary);
   background-color: var(--bg-primary);
@@ -140,8 +140,13 @@ html {
 
 /* Animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 .floating {
@@ -153,18 +158,27 @@ html {
   .container {
     padding: 0 15px;
     max-width: 100%;
-    /* overflow-x: hidden; */
     width: 100%;
   }
-  
+
   .section-padding {
     padding: 60px 0;
   }
 
-  html, body {
+  html,
+  body {
     max-width: 100%;
-    /* overflow-x: hidden; */
     position: relative;
+  }
+
+  .card {
+    padding: 25px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 10px 24px;
+    font-size: 0.95rem;
   }
 }
 
@@ -180,6 +194,12 @@ html {
   .card {
     padding: 20px;
   }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 320px) {
@@ -187,9 +207,17 @@ html {
     padding: 0 8px;
   }
 
+  .section-padding {
+    padding: 30px 0;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
   .btn-primary,
   .btn-secondary {
-    padding: 10px 20px;
-    font-size: 0.9rem;
+    padding: 6px 16px;
+    font-size: 0.85rem;
   }
 }

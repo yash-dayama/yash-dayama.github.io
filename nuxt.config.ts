@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     'nuxt-gtag'
   ],
   gtag: {
-    id: 'GTM-NFDVCHCB'
+    id: 'G-V862ZC2J7Z'
   },
   vite: {
     build: {

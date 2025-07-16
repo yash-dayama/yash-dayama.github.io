@@ -75,7 +75,7 @@ import { TextPlugin } from "gsap/TextPlugin";
 
 gsap.registerPlugin(TextPlugin);
 gsap.config({
-  nullTargetWarn: false
+  nullTargetWarn: false,
 });
 
 const heroTitle = ref(null);
@@ -87,16 +87,16 @@ const scrollIndicator = ref(null);
 const codeSnippet = ref(null);
 
 const scrollTo = (elementId) => {
-  const element = document.getElementById(elementId)
+  const element = document.getElementById(elementId);
   if (element) {
     element.scrollIntoView({ behavior: "smooth" });
   }
 };
 
 const trackCVDownload = () => {
-  window.gtag('event', 'cv_download', {
-    'event_category': 'engagement',
-    'event_label': 'CV Download Button Click'
+  window.gtag("event", "cv_download", {
+    event_category: "engagement",
+    event_label: "CV Download Button Click",
   });
 };
 
@@ -155,10 +155,10 @@ onMounted(() => {
     {
       scale: 1,
       rotation: 0,
-      duration: 1,
+      duration: 0.8,
       stagger: 0.1,
       ease: "back.out(1.7)",
-      delay: 1.5,
+      delay: 0.5,
     }
   );
 
@@ -177,7 +177,7 @@ onMounted(() => {
     yoyo: true,
     ease: "power2.inOut",
     stagger: 0.2,
-    delay: 3,
+    delay: 1.5,
   });
 });
 </script>
@@ -250,7 +250,7 @@ onMounted(() => {
   gap: 40px;
 }
 
-@media screen and (min-width:576px) {
+@media screen and (min-width: 576px) {
   .hero-stats {
     flex-direction: row;
   }
@@ -424,13 +424,34 @@ onMounted(() => {
     text-align: center;
   }
 
-  .element-1 { top: 5%; left: 10%; }
-  .element-2 { top: 15%; right: 10%; }
-  .element-3 { top: 25%; left: 15%; }
-  .element-4 { top: 35%; right: 15%; }
-  .element-5 { top: 45%; left: 10%; }
-  .element-6 { top: 55%; right: 10%; }
-  .element-7 { top: 65%; left: 15%; }
+  .element-1 {
+    top: 5%;
+    left: 10%;
+  }
+  .element-2 {
+    top: 15%;
+    right: 10%;
+  }
+  .element-3 {
+    top: 25%;
+    left: 15%;
+  }
+  .element-4 {
+    top: 35%;
+    right: 15%;
+  }
+  .element-5 {
+    top: 45%;
+    left: 10%;
+  }
+  .element-6 {
+    top: 55%;
+    right: 10%;
+  }
+  .element-7 {
+    top: 65%;
+    left: 15%;
+  }
 
   .hero-text h1 {
     font-size: 2.5rem;

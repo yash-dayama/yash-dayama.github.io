@@ -10,6 +10,7 @@
       <Contact />
     </main>
     <Footer />
+    <ScrollToTop />
   </div>
 </template>
 

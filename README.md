@@ -36,10 +36,8 @@ npm install
 
 3. Create a `.env` file in the root directory and add your environment variables:
 ```env
-EMAILJS_PUBLIC_KEY=your_public_key
-EMAILJS_SERVICE_ID=your_service_id
-EMAILJS_TEMPLATE_ID=your_template_id
-GOOGLE_ANALYTICS_ID-your_analytics_key
+# Only required for analytics
+GOOGLE_ANALYTICS_ID=your_analytics_key
 ```
 
 4. Run the development server:
@@ -51,6 +49,10 @@ npm run dev
 ```bash
 npm run build
 ```
+
+## Contact Form
+
+The contact form is powered by FormSubmit.co, a free service that handles form submissions and email delivery. No additional configuration is required - it works out of the box!
 
 ## Analytics
 

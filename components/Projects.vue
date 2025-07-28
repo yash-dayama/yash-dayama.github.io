@@ -12,9 +12,9 @@
             <div class="image-placeholder">
               <span>{{ project.title.charAt(0) }}</span>
             </div>
-            <div class="project-overlay">
+            <!-- <div class="project-overlay">
               <a :href="project.demo" target="_blank" class="btn-primary">Live Demo</a>
-            </div>
+            </div> -->
           </div>
           
           <div class="project-content">
@@ -49,6 +49,17 @@
 </template>
 
 <script setup>
+const config = useRuntimeConfig();
+
+const trackProjectClick = (projectName) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'project_click', {
+      event_category: 'Portfolio_Engagement',
+      event_label: projectName,
+      send_to: config.public.googleAnalytics.id
+    });
+  }
+};
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'

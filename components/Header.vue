@@ -45,10 +45,29 @@ const logo = ref(null);
 const navMenu = ref(null);
 const navToggle = ref(null);
 
+const config = useRuntimeConfig();
+
+const trackNavigation = (section) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'navigation', {
+      event_category: 'User_Navigation',
+      event_label: section,
+      send_to: config.public.googleAnalytics.id
+    });
+  }
+};
+
 const scrollTo = (elementId) => {
   const element = document.getElementById(elementId);
   if (element) {
     element.scrollIntoView({ behavior: "smooth" });
+    // Track navigation
+    trackNavigation(elementId);
+    // Close mobile menu after clicking a link
+    if (window.innerWidth <= 768) {
+      navMenu.value.classList.remove('active');
+      navToggle.value.classList.remove('active');
+    }
   }
 };
 
@@ -176,12 +195,23 @@ onMounted(() => {
     justify-content: flex-start;
     align-items: center;
     padding-top: 50px;
-    transition: left 0.3s ease;
+    transition: all 0.3s ease;
     border-top: 1px solid var(--border-color);
   }
 
   .nav-menu.active {
     left: 0;
+  }
+
+  .nav-menu li a {
+    display: block;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-menu li a:hover {
+    background: var(--bg-secondary);
   }
 
   .nav-toggle {

@@ -5,24 +5,27 @@
         <h2 class="text-gradient">Get In Touch</h2>
         <p>Let's discuss your next project or opportunity</p>
       </div>
-      
+
       <div class="contact-content">
         <div class="contact-info" ref="contactInfo">
           <h3>Let's Connect</h3>
           <p>
-            I'm always interested in new opportunities and exciting projects. 
-            Whether you have a question or just want to say hi, feel free to reach out!
+            I'm always interested in new opportunities and exciting projects.
+            Whether you have a question or just want to say hi, feel free to
+            reach out!
           </p>
-          
+
           <div class="contact-methods">
             <div class="contact-method">
               <div class="contact-icon">📧</div>
               <div class="contact-details">
                 <h4>Email</h4>
-                <a href="mailto:yash.dayamaa@gmail.com">yash.dayamaa@gmail.com</a>
+                <a href="mailto:yash.dayamaa@gmail.com"
+                  >yash.dayamaa@gmail.com</a
+                >
               </div>
             </div>
-            
+
             <div class="contact-method">
               <div class="contact-icon">📱</div>
               <div class="contact-details">
@@ -30,24 +33,30 @@
                 <a href="tel:+919023755762">+91 9023755762</a>
               </div>
             </div>
-            
+
             <div class="contact-method">
               <div class="contact-icon">💼</div>
               <div class="contact-details">
                 <h4>LinkedIn</h4>
-                <a href="https://www.linkedin.com/in/yashdayama/" target="_blank">linkedin.com/in/yashdayama</a>
+                <a
+                  href="https://www.linkedin.com/in/yashdayama/"
+                  target="_blank"
+                  >linkedin.com/in/yashdayama</a
+                >
               </div>
             </div>
-            
+
             <div class="contact-method">
               <div class="contact-icon">🌐</div>
               <div class="contact-details">
                 <h4>GitHub</h4>
-                <a href="https://github.com/yash-dayama" target="_blank">github.com/yash-dayama</a>
+                <a href="https://github.com/yash-dayama" target="_blank"
+                  >github.com/yash-dayama</a
+                >
               </div>
             </div>
           </div>
-          
+
           <div class="availability">
             <h4>Current Status</h4>
             <div class="status-indicator">
@@ -56,56 +65,63 @@
             </div>
           </div>
         </div>
-        
+
         <div class="contact-form" ref="contactForm">
-          <form @submit.prevent="submitForm">
+          <form
+            action="https://formsubmit.co/70137448fe559a9b6ee912ae448a8cc9"
+            method="POST"
+          >
+            <input
+              type="hidden"
+              name="_next"
+              value="https://yash-dayama.github.io"
+            />
+            <input type="hidden" name="_template" value="table" />
             <div class="form-group">
               <label for="name">Name</label>
-              <input 
-                type="text" 
-                id="name" 
-                v-model="form.name" 
-                required 
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
                 placeholder="Your full name"
-              >
+              />
             </div>
-            
+
             <div class="form-group">
               <label for="email">Email</label>
-              <input 
-                type="email" 
-                id="email" 
-                v-model="form.email" 
-                required 
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
                 placeholder="your.email@example.com"
-              >
+              />
             </div>
-            
+
             <div class="form-group">
               <label for="subject">Subject</label>
-              <input 
-                type="text" 
-                id="subject" 
-                v-model="form.subject" 
-                required 
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                required
                 placeholder="What's this about?"
-              >
+              />
             </div>
-            
+
             <div class="form-group">
               <label for="message">Message</label>
-              <textarea 
-                id="message" 
-                v-model="form.message" 
-                required 
+              <textarea
+                id="message"
+                name="message"
+                required
                 rows="6"
                 placeholder="Tell me about your project or opportunity..."
               ></textarea>
             </div>
-            
-            <button type="submit" class="btn-primary" :disabled="isSubmitting">
-              {{ isSubmitting ? 'Sending...' : 'Send Message' }}
-            </button>
+
+            <button type="submit" class="btn-primary">Send Message</button>
           </form>
         </div>
       </div>
@@ -114,63 +130,90 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import emailjs from '@emailjs/browser'
+import { ref, reactive, onMounted } from "vue";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const config = useRuntimeConfig()
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
-emailjs.init(config.public.emailjs.publicKey)
-
-const sectionHeader = ref(null)
-const contactInfo = ref(null)
-const contactForm = ref(null)
-const isSubmitting = ref(false)
+const sectionHeader = ref(null);
+const contactInfo = ref(null);
+const contactForm = ref(null);
+const isSubmitting = ref(false);
 
 const form = reactive({
-  name: '',
-  email: '',
-  subject: '',
-  message: ''
-})
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+});
+
+const config = useRuntimeConfig();
+
+const trackFormSubmission = (success) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'form_submission', {
+      event_category: 'Contact_Form',
+      event_label: success ? 'Success' : 'Failed',
+      send_to: config.public.googleAnalytics.id
+    });
+  }
+};
 
 const submitForm = async () => {
-  isSubmitting.value = true
-  
+  isSubmitting.value = true;
+
   try {
-    const templateParams = {
-      name: form.name,
-      email: form.email,
-      subject: form.subject,
-      message: form.message
+    const response = await fetch(
+      "https://formsubmit.co/70137448fe559a9b6ee912ae448a8cc9",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+          _subject: `Portfolio Contact: ${form.subject}`,
+          _template: "table",
+          _next: "https://yash-dayama.github.io",
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to send message");
     }
 
-    await emailjs.send(
-      config.public.emailjs.serviceId,
-      config.public.emailjs.templateId,
-      templateParams
-    )
+    // Track successful submission
+    trackFormSubmission(true);
 
-    alert('Message sent successfully!')
-    
+    alert("Message sent successfully!");
+
     // Reset form
-    form.name = ''
-    form.email = ''
-    form.subject = ''
-    form.message = ''
+    form.name = "";
+    form.email = "";
+    form.subject = "";
+    form.message = "";
   } catch (error) {
-    console.error('Error sending email:', error)
-    alert('Sorry, there was an error sending your message. Please try again later.')
+    console.error("Error sending email:", error);
+    // Track failed submission
+    trackFormSubmission(false);
+    alert(
+      "Sorry, there was an error sending your message. Please try again later."
+    );
   } finally {
-    isSubmitting.value = false
+    isSubmitting.value = false;
   }
-}
+};
 
 onMounted(() => {
   // Section header animation
-  gsap.fromTo(sectionHeader.value.children,
+  gsap.fromTo(
+    sectionHeader.value.children,
     { y: 50, opacity: 0 },
     {
       y: 0,
@@ -180,13 +223,14 @@ onMounted(() => {
       ease: "power3.out",
       scrollTrigger: {
         trigger: sectionHeader.value,
-        start: "top 80%"
-      }
+        start: "top 80%",
+      },
     }
-  )
-  
+  );
+
   // Contact info animation
-  gsap.fromTo(contactInfo.value.children,
+  gsap.fromTo(
+    contactInfo.value.children,
     { x: -100, opacity: 0 },
     {
       x: 0,
@@ -196,13 +240,14 @@ onMounted(() => {
       ease: "power3.out",
       scrollTrigger: {
         trigger: contactInfo.value,
-        start: "top 80%"
-      }
+        start: "top 80%",
+      },
     }
-  )
-  
+  );
+
   // Contact form animation
-  gsap.fromTo(contactForm.value,
+  gsap.fromTo(
+    contactForm.value,
     { x: 100, opacity: 0 },
     {
       x: 0,
@@ -211,11 +256,11 @@ onMounted(() => {
       ease: "power3.out",
       scrollTrigger: {
         trigger: contactForm.value,
-        start: "top 80%"
-      }
+        start: "top 80%",
+      },
     }
-  )
-})
+  );
+});
 </script>
 
 <style scoped>
@@ -344,9 +389,15 @@ onMounted(() => {
 }
 
 @keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .contact-form {
@@ -411,15 +462,15 @@ onMounted(() => {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .section-header h2 {
     font-size: 2.5rem;
   }
-  
+
   .contact-form {
     padding: 30px 20px;
   }
-  
+
   .contact-method {
     flex-direction: column;
     text-align: center;

@@ -15,7 +15,23 @@
 </template>
 
 <script setup>
-const { isDark, toggleTheme } = useTheme()
+const config = useRuntimeConfig();
+const { isDark, toggleTheme: originalToggleTheme } = useTheme();
+
+const trackThemeChange = (theme) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'theme_change', {
+      event_category: 'User_Preference',
+      event_label: theme,
+      send_to: config.public.googleAnalytics.id
+    });
+  }
+};
+
+const toggleTheme = () => {
+  originalToggleTheme();
+  trackThemeChange(isDark.value ? 'dark' : 'light');
+};
 </script>
 
 <style scoped>

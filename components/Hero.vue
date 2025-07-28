@@ -21,6 +21,7 @@
               class="btn-primary"
               target="_blank"
               rel="noopener noreferrer"
+              :style="{ lineHeight: 1.8 }"
               @click="trackCVDownload"
               >Download CV</a
             >
@@ -96,96 +97,118 @@ const scrollTo = (elementId) => {
 const config = useRuntimeConfig();
 
 const trackCVDownload = () => {
+  if (typeof window === "undefined" || !window.gtag) return;
+
   try {
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag("event", "CV_Download_Click", {
-        event_category: "Portfolio_Engagement",
-        event_label: "Resume_Download",
-        send_to: config.public.googleAnalytics.id
-      });
-    }
+    window.gtag("event", "download", {
+      event_category: "Portfolio_Engagement",
+      event_label: "CV Download",
+      send_to: config.public.googleAnalytics.id
+    });
   } catch (error) {
-    console.warn('Google Analytics tracking unavailable');
+    console.error("Failed to track CV download:", error);
   }
 };
 
+const initializeElements = () => {
+  gsap.set(heroTitle.value.children, { y: 100, opacity: 0 });
+  gsap.set(heroDescription.value, { y: 50, opacity: 0 });
+  gsap.set(heroVisual.value, { x: 100, opacity: 0 });
+  gsap.set(".element", { scale: 0, rotation: 180, opacity: 0 });
+  gsap.set(heroButtons.value.children, { y: 50, opacity: 0 });
+  gsap.set(heroStats.value.children, { scale: 0, opacity: 0 });
+  gsap.set(scrollIndicator.value, { y: 50, opacity: 0 });
+};
+
 onMounted(() => {
-  const tl = gsap.timeline();
+  // Initialize elements immediately
+  initializeElements();
 
-  // Hero title animation
-  tl.fromTo(
-    heroTitle.value.children,
-    { y: 100, opacity: 0 },
-    { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" }
-  );
-
-  // Description animation
-  tl.fromTo(
-    heroDescription.value,
-    { y: 50, opacity: 0 },
-    { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-    "-=0.5"
-  );
-
-  // Visual elements and floating elements animation
-  tl.fromTo(
-    heroVisual.value,
-    { x: 100, opacity: 0 },
-    { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-    "-=0.3"
-  ).fromTo(
-    ".element",
-    { scale: 0, rotation: 180 },
-    {
-      scale: 1,
-      rotation: 0,
-      duration: 0.6,
-      stagger: 0.08,
-      ease: "back.out(1.7)",
+  // Create a more optimized timeline
+  const tl = gsap.timeline({
+    defaults: {
+      ease: "power3.out",
+      duration: 0.4,
     },
-    "-=0.5"
-  );
+  });
 
-  // Buttons animation
-  tl.fromTo(
-    heroButtons.value.children,
-    { y: 50, opacity: 0 },
-    { y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power3.out" },
-    "-=0.3"
-  );
-
-  // Stats animation
-  tl.fromTo(
-    heroStats.value.children,
-    { scale: 0, opacity: 0 },
-    {
-      scale: 1,
-      opacity: 1,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: "back.out(1.7)",
-    },
-    "-=0.3"
-  );
-
-  // Scroll indicator animation
-  gsap.fromTo(
-    scrollIndicator.value,
-    { y: 50, opacity: 0 },
-    { y: 0, opacity: 1, duration: 1, delay: 2.5, ease: "power3.out" }
-  );
-
-  // Start continuous floating animation immediately after elements appear
-  tl.add(() => {
-    gsap.to(".element", {
-      y: -15,
-      duration: 1.5,
-      repeat: -1,
-      yoyo: true,
-      ease: "power2.inOut",
-      stagger: 0.15,
-    });
-  }, "-=0.3");
+  // Batch animations for better performance
+  tl.to(heroTitle.value.children, {
+    y: 0,
+    opacity: 1,
+    stagger: 0.08,
+    duration: 0.4,
+  })
+    .to(
+      heroDescription.value,
+      {
+        y: 0,
+        opacity: 1,
+      },
+      "-=0.2"
+    )
+    .to(
+      heroVisual.value,
+      {
+        x: 0,
+        opacity: 1,
+      },
+      "-=0.2"
+    )
+    .to(
+      ".element",
+      {
+        scale: 1,
+        rotation: 0,
+        opacity: 1,
+        duration: 0.3,
+        stagger: 0.03,
+        ease: "back.out(1.7)",
+        onComplete: () => {
+          // Start floating animation only after elements appear
+          gsap.to(".element", {
+            y: -12,
+            duration: 1.2,
+            repeat: -1,
+            yoyo: true,
+            ease: "power2.inOut",
+            stagger: {
+              each: 0.05,
+              from: "random",
+            },
+          });
+        },
+      },
+      "-=0.2"
+    )
+    .to(
+      heroButtons.value.children,
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.08,
+      },
+      "-=0.2"
+    )
+    .to(
+      heroStats.value.children,
+      {
+        scale: 1,
+        opacity: 1,
+        stagger: 0.05,
+        ease: "back.out(1.7)",
+      },
+      "-=0.2"
+    )
+    .to(
+      scrollIndicator.value,
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.3,
+      },
+      "+=0.2"
+    );
 });
 </script>
 
@@ -304,7 +327,7 @@ onMounted(() => {
   transition: all 0.3s ease;
   z-index: 2;
   max-height: max-content;
-  min-width: min-content
+  min-width: min-content;
 }
 
 .element:hover {

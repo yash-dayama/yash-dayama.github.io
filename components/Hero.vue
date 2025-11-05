@@ -11,7 +11,7 @@
 
           <p ref="heroDescription">
             Passionate developer with 3+ years of experience creating innovative
-            web solutions. I specialize in React, Node.js, and modern web
+            web solutions. I specialize in React, Node.js and Java/Spring Boot and modern web
             technologies to build scalable applications.
           </p>
 
@@ -52,7 +52,7 @@
         <div class="hero-visual" ref="heroVisual">
           <div class="floating-elements">
             <div class="element element-1">React.js</div>
-            <div class="element element-2">Vue.js</div>
+            <div class="element element-2">Java</div>
             <div class="element element-3">Node.js</div>
             <div class="element element-4">TypeScript</div>
             <div class="element element-5">MongoDB</div>

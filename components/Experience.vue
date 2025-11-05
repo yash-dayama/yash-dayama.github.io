@@ -49,9 +49,32 @@ const timelineItems = ref([])
 
 const experiences = [
   {
+  "title": "Senior Software Developer",
+  "company": "Agile Infoways",
+  "duration": "August 2025 - Present",
+  "summary": "Full-stack development leader and mentor driving enterprise web applications within **Agile/Scrum** environments. Expertise spans **React, Node.js, and Python**, recently fortified with **Java/Spring Boot** for building scalable microservices and cloud solutions.",
+  "achievements": [
+  "Successfully onboarded and established new Java/Spring Boot service templates and coding standards.",
+    "Contributed to the design and planning phase for a major microservices migration project.",
+    "Established initial deployment configurations for new services using **Docker** and internal cloud infrastructure.",
+  ],
+  "technologies": [
+    "Java",
+    "Spring Boot",
+    "React",
+    "Node.js",
+    "TypeScript",
+    "Python",
+    "AWS",
+    "Docker",
+    "MongoDB",
+    "Agile/Scrum"
+  ]
+},
+  {
     title: "Full Stack Developer",
     company: "Impero IT Services",
-    duration: "July 2023 - Present",
+    duration: "July 2023 - July 2025",
     description: "Leading development of enterprise web applications and mentoring junior developers. Responsible for architecture decisions and implementing best practices across the development team.",
     achievements: [
       "Led a team of 5 developers in building a comprehensive e-learning platform",

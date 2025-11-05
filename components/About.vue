@@ -82,7 +82,7 @@ const skills = [
   },
   {
     name: "Backend",
-    items: ["Node.js", "Express.js", "Nest.js", "Python","REST APIs", "GraphQL", "Microservices"]
+    items: ["Node.js", "Express.js", "Nest.js", "Python", "Java", "Spring Boot", "REST APIs", "GraphQL", "Microservices"]
   },
   {
     name: "Database",

@@ -16,14 +16,14 @@
           </p>
 
           <div class="hero-buttons" ref="heroButtons">
-            <
+            <a
               href="https://drive.google.com/file/d/1YjXcIHQKhe2e6YvAisLUaFQK0-pT-q8W/view?usp=sharing"
               class="btn-primary"
               target="_blank"
               rel="noopener noreferrer"
               :style="{ lineHeight: 1.8 }"
               @click="trackCVDownload"
-              >Download CV
+              >Download CV</a
             >
             <a
               href="#contact"

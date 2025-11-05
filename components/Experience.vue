@@ -56,7 +56,7 @@ const experiences = [
   "achievements": [
   "Successfully onboarded and established new Java/Spring Boot service templates and coding standards.",
     "Contributed to the design and planning phase for a major microservices migration project.",
-    "Established initial deployment configurations for new services using **Docker** and internal cloud infrastructure.",
+    "Established initial deployment configurations for new services using Docker and internal cloud infrastructure.",
   ],
   "technologies": [
     "Java",
